@@ -31,7 +31,7 @@ RSpec.describe Nomics::Currency do
     end
   end
 
-  Nomics::Currency::ATTTRIBUTES_WITH_TYPES.each do |attribute_name, _attribute_type|
+  Nomics::Currency::ATTRIBUTES_WITH_TYPES.each do |attribute_name, _attribute_type|
     describe "##{attribute_name}" do
       let(:currency) { described_class.new('BTC') }
 

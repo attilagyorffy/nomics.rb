@@ -3,7 +3,7 @@ require 'bigdecimal'
 
 module Nomics
   class Currency
-    ATTTRIBUTES_WITH_TYPES = {
+    ATTRIBUTES_WITH_TYPES = {
       'id' => :string,
       'currency' => :string,
       'symbol' => :symbol,
@@ -35,7 +35,7 @@ module Nomics
       @symbol = symbol.to_s.upcase.to_sym
       @quote_currency = convert.to_s.upcase.to_sym
 
-      ATTTRIBUTES_WITH_TYPES.except('symbol').keys.each do |attribute_name|
+      ATTRIBUTES_WITH_TYPES.except('symbol').keys.each do |attribute_name|
         instance_variable_set("@#{attribute_name}", nil)
       end
     end
@@ -44,7 +44,7 @@ module Nomics
       name <=> other_currency.name
     end
 
-    ATTTRIBUTES_WITH_TYPES.except('symbol').each do |(attribute_name, attribute_type)|
+    ATTRIBUTES_WITH_TYPES.except('symbol').each do |(attribute_name, attribute_type)|
       define_method(attribute_name) do
         attributes[attribute_name]
       end
@@ -52,9 +52,9 @@ module Nomics
 
     def attributes(reload: false)
       if reload
-        @attributes = attributes_with_types data.slice(*ATTTRIBUTES_WITH_TYPES.keys)
+        @attributes = attributes_with_types data.slice(*ATTRIBUTES_WITH_TYPES.keys)
       else
-        @attributes ||= attributes_with_types data.slice(*ATTTRIBUTES_WITH_TYPES.keys)
+        @attributes ||= attributes_with_types data.slice(*ATTRIBUTES_WITH_TYPES.keys)
       end
 
       @attributes.each do |(attribute_name, attribute_value)|
@@ -71,7 +71,7 @@ module Nomics
 
     def attributes_with_types(attributes = {})
       attributes.inject({}) do |typed_attributes, (attribute_key, attribute_value)|
-        typed_attributes[attribute_key] = cast value: attribute_value, type: ATTTRIBUTES_WITH_TYPES[attribute_key]
+        typed_attributes[attribute_key] = cast value: attribute_value, type: ATTRIBUTES_WITH_TYPES[attribute_key]
 
         typed_attributes
       end
