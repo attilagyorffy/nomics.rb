@@ -1,6 +1,8 @@
 # Nomics
 
-[Nomics](https://p.nomics.com/about) is an API-first cryptoasset data company delivering professional-grade market data APIs to institutional crypto investors & exchanges. This gem provides Ruby bindings to its V1 API.
+[Nomics](https://p.nomics.com/about) is an API-first cryptoasset data company delivering professional-grade market data APIs to institutional crypto investors & exchanges. This gem provides simple Ruby wrappers to the Nomics.
+
+*⚠️ Note: This gem is currencly a work-in-progress with limited functionality and its interface is subject to change. For this reason, it's curently using a 0.x version number. Versioning follows the [Semantic Versioning Specification (SemVer)](https://semver.org).*
 
 ## Installation
 
