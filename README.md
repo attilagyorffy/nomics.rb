@@ -101,7 +101,7 @@ eth_in_usd = Nomics::Currency.new('ETH') # convert defaults to USD
 
 ### Calculating the price of one cryptocurrency from another
 
-Advanced calculations are yet under consideration for this gem, but you can calculate prices in relation to their dollar value. For example:
+Advanced calculations are yet under consideration for this gem, but you can calculate prices using the data from Nomics anyway. For example to calcculate the ETH to BTC price (in relation to their dollar value), fetch the prices in USD (default) and run a simple division:
 
 ```ruby
 btc_price_in_usd = Nomics::Currency.new('BTC').price.to_f # Nomics API defaults to USD
