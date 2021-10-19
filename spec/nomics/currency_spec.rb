@@ -46,7 +46,7 @@ RSpec.describe Nomics::Currency do
 
     let(:currency) { described_class.new(:BTC) }
 
-    context 'when data has not YET been loaded' do
+    context 'when data has NOT yet been loaded' do
       it 'loads data from the Nomics API' do
         VCR.use_cassette('btc-ticker') do
           currency.attributes
@@ -86,17 +86,17 @@ RSpec.describe Nomics::Currency do
       end
     end
 
-    it 'returns a set of known attributes type casted' do
+    it 'returns a set of known attributes with type casting' do
       VCR.use_cassette('btc-ticker') do
         expect(attributes).to be_a Hash
       end
 
-      expect(attributes.slice(*%w[id symbol name currency])).to eql({
-        "currency"=>"BTC",
-        "id"=>"BTC",
-        "name"=>"Bitcoin",
-        "symbol"=>:BTC
-      })
+      expect(attributes['id']).to eql('BTC')
+      expect(attributes['name']).to eql('Bitcoin')
+      expect(attributes['currency']).to eql('BTC')
+      expect(attributes['symbol']).to eql(:BTC)
+      expect(attributes['price']).to eql(BigDecimal('61255.21807833'))
+      expect(attributes['price_date']).to eql(Time.parse('2021-10-18T00:00:00Z'))
     end
   end
 
@@ -107,7 +107,7 @@ RSpec.describe Nomics::Currency do
       before do
         stub_request(:get, %r{https://api.nomics.com}).to_return(
           status: 200,
-          body: [{'id' => 'BTC'}].to_json
+          body: [{'id' => 'BTC', 'price' => '2000'}].to_json
         )
       end
 
